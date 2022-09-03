@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FeriaUDEO2022Context>();
 builder.Services.AddScoped<IDataRepository, DataRepository>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
 builder.Services.AddCors();
 var app = builder.Build();

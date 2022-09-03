@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rKjfXW8OQCyTl6E31B91FSD3aE2TGXhu7RSjQ98qGZMG5HnDrsE7fyU8M+jbLD2fjqxow47vs1pkcuxumOT5mw==",
+  "dgSpecHash": "Om2Lo+qzGK/eUBgkAMxj8IS4fUkz3NdiZrS/CROkb2OkOyH8qPJiwuD0Ye6hN19imM4XRdZPE5msEkC4mOMA8Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Emanuel\\source\\repos\\FeriaUDEO2022API\\FeriaUDEO2022API\\FeriaUDEO2022API.csproj",
+  "projectFilePath": "D:\\Documents\\tareas\\Desarrollo Movil\\1\\Proyecto\\RepoApiData\\Angular-y-C-\\FeriaUDEO2022API\\FeriaUDEO2022API\\FeriaUDEO2022API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Emanuel\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Emanuel\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
