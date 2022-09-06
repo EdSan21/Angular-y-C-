@@ -5,5 +5,7 @@ namespace FeriaUDEO2022API.Repository
     {
         Task<List<JuradoPageModel>> GetjuradoAsync();
         Task<ProyectosPageModel> GetProyectsAsync();
+
+        Task<DetailProyectModel> GetDetailsAsync(int id);
     }
 }

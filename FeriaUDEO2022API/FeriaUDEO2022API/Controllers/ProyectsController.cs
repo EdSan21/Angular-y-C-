@@ -36,5 +36,16 @@ namespace FeriaUDEO2022API.Controllers
             var respuesta = await _dataRepository.GetProyectsAsync();
             return Ok(respuesta);
         }
+        [Route("{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetProyectsPageAsync([FromRoute] int id)
+        {
+            var respuesta = await _dataRepository.GetDetailsAsync(id);
+            if (respuesta==null)
+            {
+                return NotFound();
+            }
+            return Ok(respuesta);
+        }
     }
 }

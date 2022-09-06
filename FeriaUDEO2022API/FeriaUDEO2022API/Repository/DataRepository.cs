@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FeriaUDEO2022API.Repository
@@ -75,6 +76,40 @@ namespace FeriaUDEO2022API.Repository
                         }
                     ).ToListAsync()
             };
+
+            return respuesta;
+        }
+
+        public async Task<DetailProyectModel> GetDetailsAsync(int id)
+        {
+
+            DetailProyectModel respuesta = await _context.Proyectos.Where(x => x.IdProyecto == id).Select(x => new DetailProyectModel
+            {
+                titulo = x.Titulo,
+                descripcion = x.Descripcion,
+                video = x.Video,
+                imgBanner=x.ImgBanner,
+                imgCarta=x.ImgCarta,
+                imgStandar=x.ImgStandar,
+                horaInicio=x.HoraInicio.TimeOfDay.ToString(),
+                horaFin=x.HoraFin.TimeOfDay.ToString(),
+                estudiantes=_context.EstudianteProyectos.Where(z=> z.IdProyecto==id).Select(z=> new DetailEstudiantesModel {
+                    carnet=z.CarnetNavigation.Carnet,
+                    nombre= Regex.Replace(z.CarnetNavigation.Nombre + ' ' + z.CarnetNavigation.Nombre2 + ' ' + z.CarnetNavigation.Apellido + ' ' + z.CarnetNavigation.Apellido2, @"\s+", " "),
+                    rol=z.CarnetNavigation.Rol,
+                    carrera=z.CarnetNavigation.IdCarreraNavigation.Nombre,
+                    imagen=z.CarnetNavigation.Imagen
+                }).ToList(),
+                supervisores=_context.SupervisorProyectos.Where(y=>y.IdProyecto==id).Select(y=> new DetailSupervisorModel { 
+                    titulo=y.IdUsuarioNavigation.Titulo,
+                    informacion=y.IdUsuarioNavigation.Informacion,
+                    nombre= Regex.Replace(y.IdUsuarioNavigation.Nombre + ' ' + y.IdUsuarioNavigation.Nombre2 + ' ' + y.IdUsuarioNavigation.Apellido + ' ' + y.IdUsuarioNavigation.Apellido2, @"\s+", " "),
+                    imagen=y.IdUsuarioNavigation.Imagen
+                }).ToList()
+
+
+
+            }).FirstOrDefaultAsync();
 
             return respuesta;
         }
