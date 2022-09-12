@@ -12,7 +12,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FeriaUdeo2022Context>();
 
-builder.Services.AddScoped<IEncryptRepository, EncryptRepository>();
 builder.Services.AddScoped<IDataRepository, DataRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 

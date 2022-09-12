@@ -27,13 +27,13 @@ namespace FeriaUDEO2022API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> PostLogin([FromBody] string Cadena)
+        public async Task<ActionResult<SessionModel>> PostLogin(LoginModel login)
         {
             if (_context.TipoUsuarios == null)
             {
                 return Problem("Entity set 'FeriaUDEO2022Context.TipoUsuarios'  is null.");
             }
-            var respuesta = await _loginRepository.LoginAsync(Cadena);
+            var respuesta = await _loginRepository.LoginAsync(login.User,login.Password);
 
             if (respuesta==null)
             {

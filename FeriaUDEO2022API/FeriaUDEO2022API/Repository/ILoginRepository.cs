@@ -5,6 +5,6 @@ namespace FeriaUDEO2022API.Repository
 {
     public interface ILoginRepository
     {
-        Task<ActionResult<string>> LoginAsync(string Cadena);
+        Task<ActionResult<SessionModel>> LoginAsync(string Usuario,string Password);
     }
 }

@@ -20,27 +20,17 @@ namespace FeriaUDEO2022API.Repository
     public class LoginRepository:ILoginRepository
     {
         private readonly FeriaUdeo2022Context _context;
-        private readonly EncryptRepository _Encrypt = new EncryptRepository();
         public LoginRepository(FeriaUdeo2022Context context)
         {
             _context = context;
         }
 
-        public async Task<ActionResult<string>> LoginAsync(string cadena)
+        public async Task<ActionResult<SessionModel>> LoginAsync(string User, string Password)
         {
             try
             {
 
-                string decodificado = _Encrypt.Decrypt(cadena.Trim());
-
-                var Cuenta = JsonConvert.DeserializeObject<LoginModel>(decodificado);
-
-                if (Cuenta==null)
-                {
-                    return null;
-                }
-
-                SessionModel session = await _context.Usuarios.Where(x => EF.Functions.Collate(x.Usuario1, "SQL_Latin1_General_CP1_CS_AS") == Cuenta.User && EF.Functions.Collate(x.Contrasenia, "SQL_Latin1_General_CP1_CS_AS") == Cuenta.Password).
+                SessionModel session = await _context.Usuarios.Where(x => EF.Functions.Collate(x.Usuario1, "SQL_Latin1_General_CP1_CS_AS") == User && EF.Functions.Collate(x.Contrasenia, "SQL_Latin1_General_CP1_CS_AS") == Password).
                     Select(X => new SessionModel
                     {
                         SessionUser = X.Usuario1,
@@ -56,9 +46,8 @@ namespace FeriaUDEO2022API.Repository
                 else
                 {
 
-                    string json = JsonConvert.SerializeObject(session);
-                    string respuesta = _Encrypt.Encrypt(json);
-                    return respuesta;
+                    
+                    return session;
                 }
             }
             catch (Exception)
