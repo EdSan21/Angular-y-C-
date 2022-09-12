@@ -13,35 +13,58 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FeriaUDEO2022API.Models;
+using Newtonsoft.Json;
 
 namespace FeriaUDEO2022API.Repository
 {
     public class LoginRepository:ILoginRepository
     {
-        private readonly FeriaUDEO2022Context _context;
-        public LoginRepository(FeriaUDEO2022Context context)
+        private readonly FeriaUdeo2022Context _context;
+        private readonly EncryptRepository _Encrypt = new EncryptRepository();
+        public LoginRepository(FeriaUdeo2022Context context)
         {
             _context = context;
         }
 
-        public async Task<ActionResult<SessionModel>> LoginAsync(string User, string Password)
+        public async Task<ActionResult<string>> LoginAsync(string cadena)
         {
-
-            SessionModel session = await _context.Usuarios.Where(x => EF.Functions.Collate(x.Usuario1, "SQL_Latin1_General_CP1_CS_AS") == User && EF.Functions.Collate(x.Contrasenia, "SQL_Latin1_General_CP1_CS_AS")==Password).
-                Select(X=> new SessionModel { 
-                    SessionUser=X.Usuario1,
-                    SessionId=X.IdUsuario,
-                    SessionName=X.Nombre+" "+X.Apellido,
-                    SessionImg=X.Imagen
-                }).FirstOrDefaultAsync() ;
-
-            if (session==null)
+            try
             {
-                return null;
+
+                string decodificado = _Encrypt.Decrypt(cadena.Trim());
+
+                var Cuenta = JsonConvert.DeserializeObject<LoginModel>(decodificado);
+
+                if (Cuenta==null)
+                {
+                    return null;
+                }
+
+                SessionModel session = await _context.Usuarios.Where(x => EF.Functions.Collate(x.Usuario1, "SQL_Latin1_General_CP1_CS_AS") == Cuenta.User && EF.Functions.Collate(x.Contrasenia, "SQL_Latin1_General_CP1_CS_AS") == Cuenta.Password).
+                    Select(X => new SessionModel
+                    {
+                        SessionUser = X.Usuario1,
+                        SessionId = X.IdUsuario,
+                        SessionName = X.Nombre + " " + X.Apellido,
+                        SessionImg = X.Imagen
+                    }).FirstOrDefaultAsync();
+
+                if (session == null)
+                {
+                    return null;
+                }
+                else
+                {
+
+                    string json = JsonConvert.SerializeObject(session);
+                    string respuesta = _Encrypt.Encrypt(json);
+                    return respuesta;
+                }
             }
-            else
+            catch (Exception)
             {
-                return session;
+
+                throw;
             }
             
         }

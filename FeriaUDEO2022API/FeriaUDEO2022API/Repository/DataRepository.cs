@@ -10,8 +10,8 @@ namespace FeriaUDEO2022API.Repository
 {
     public class DataRepository:IDataRepository
     {
-        private readonly FeriaUDEO2022Context _context;
-        public DataRepository(FeriaUDEO2022Context context)
+        private readonly FeriaUdeo2022Context _context;
+        public DataRepository(FeriaUdeo2022Context context)
         {
             _context = context;
         }
@@ -98,7 +98,7 @@ namespace FeriaUDEO2022API.Repository
                     nombre= Regex.Replace(z.CarnetNavigation.Nombre + ' ' + z.CarnetNavigation.Nombre2 + ' ' + z.CarnetNavigation.Apellido + ' ' + z.CarnetNavigation.Apellido2, @"\s+", " "),
                     rol=z.CarnetNavigation.Rol,
                     carrera=z.CarnetNavigation.IdCarreraNavigation.Nombre,
-                    imagen=z.CarnetNavigation.Imagen
+                    imagen=z.CarnetNavigation.Imagen 
                 }).ToList(),
                 supervisores=_context.SupervisorProyectos.Where(y=>y.IdProyecto==id).Select(y=> new DetailSupervisorModel { 
                     titulo=y.IdUsuarioNavigation.Titulo,

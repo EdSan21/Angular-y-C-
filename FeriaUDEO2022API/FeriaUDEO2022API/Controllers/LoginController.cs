@@ -18,22 +18,22 @@ namespace FeriaUDEO2022API.Controllers
     public class LoginController : ControllerBase
     {
 
-        private readonly FeriaUDEO2022Context _context;
+        private readonly FeriaUdeo2022Context _context;
         private readonly ILoginRepository _loginRepository;
-        public LoginController( ILoginRepository dataRepository, FeriaUDEO2022Context context)
+        public LoginController( ILoginRepository dataRepository, FeriaUdeo2022Context context)
         {
             _loginRepository = dataRepository;
             _context = context;
         }
 
         [HttpPost]
-        public async Task<ActionResult<SessionModel>> PostTipoUsuario(LoginModel Login)
+        public async Task<ActionResult<string>> PostLogin([FromBody] string Cadena)
         {
             if (_context.TipoUsuarios == null)
             {
                 return Problem("Entity set 'FeriaUDEO2022Context.TipoUsuarios'  is null.");
             }
-            var respuesta = await _loginRepository.LoginAsync(Login.User,Login.Password);
+            var respuesta = await _loginRepository.LoginAsync(Cadena);
 
             if (respuesta==null)
             {

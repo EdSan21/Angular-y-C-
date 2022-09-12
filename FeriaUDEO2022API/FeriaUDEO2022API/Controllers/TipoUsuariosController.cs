@@ -13,9 +13,9 @@ namespace FeriaUDEO2022API.Controllers
     [ApiController]
     public class TipoUsuariosController : ControllerBase
     {
-        private readonly FeriaUDEO2022Context _context;
+        private readonly FeriaUdeo2022Context _context;
 
-        public TipoUsuariosController(FeriaUDEO2022Context context)
+        public TipoUsuariosController(FeriaUdeo2022Context context)
         {
             _context = context;
         }

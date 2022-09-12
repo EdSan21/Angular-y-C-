@@ -16,10 +16,10 @@ namespace FeriaUDEO2022API.Controllers
     [ApiController]
     public class ProyectsController : ControllerBase
     {
-        private readonly FeriaUDEO2022Context _context;
+        private readonly FeriaUdeo2022Context _context;
         private readonly IDataRepository _dataRepository;
 
-        public ProyectsController(FeriaUDEO2022Context context, IDataRepository dataRepository)
+        public ProyectsController(FeriaUdeo2022Context context, IDataRepository dataRepository)
         {
             _context = context;
             _dataRepository = dataRepository;
