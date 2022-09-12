@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FeriaUDEO2022API.Models
 {
-    public partial class FeriaUDEO2022Context : DbContext
+    public partial class FeriaUdeo2022Context : DbContext
     {
-        public FeriaUDEO2022Context()
+        public FeriaUdeo2022Context()
         {
         }
 
-        public FeriaUDEO2022Context(DbContextOptions<FeriaUDEO2022Context> options)
+        public FeriaUdeo2022Context(DbContextOptions<FeriaUdeo2022Context> options)
             : base(options)
         {
         }
@@ -20,6 +20,8 @@ namespace FeriaUDEO2022API.Models
         public virtual DbSet<CategoriaProyecto> CategoriaProyectos { get; set; } = null!;
         public virtual DbSet<Estudiante> Estudiantes { get; set; } = null!;
         public virtual DbSet<EstudianteProyecto> EstudianteProyectos { get; set; } = null!;
+        public virtual DbSet<Evento> Eventos { get; set; } = null!;
+        public virtual DbSet<Ganador> Ganadors { get; set; } = null!;
         public virtual DbSet<Proyecto> Proyectos { get; set; } = null!;
         public virtual DbSet<Reconocimiento> Reconocimientos { get; set; } = null!;
         public virtual DbSet<ReconocimientoProyecto> ReconocimientoProyectos { get; set; } = null!;
@@ -33,7 +35,7 @@ namespace FeriaUDEO2022API.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=FeriaUDEO2022;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=FeriaUdeo2022;Trusted_Connection=True;");
             }
         }
 
@@ -144,6 +146,44 @@ namespace FeriaUDEO2022API.Models
                     .WithMany(p => p.EstudianteProyectos)
                     .HasForeignKey(d => d.IdProyecto)
                     .HasConstraintName("fk_proyecto_estudiante");
+            });
+
+            modelBuilder.Entity<Evento>(entity =>
+            {
+                entity.HasKey(e => e.IdEvento)
+                    .HasName("PK__EVENTO__AF150CA584C4AB0A");
+
+                entity.ToTable("EVENTO");
+
+                entity.Property(e => e.IdEvento)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_evento");
+
+                entity.Property(e => e.Activo).HasColumnName("activo");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("nombre");
+            });
+
+            modelBuilder.Entity<Ganador>(entity =>
+            {
+                entity.HasKey(e => e.IdPodio)
+                    .HasName("PK__GANADOR__02CACAE3046741EA");
+
+                entity.ToTable("GANADOR");
+
+                entity.Property(e => e.IdPodio)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id_podio");
+
+                entity.Property(e => e.IdProyecto).HasColumnName("id_proyecto");
+
+                entity.HasOne(d => d.IdProyectoNavigation)
+                    .WithMany(p => p.Ganadors)
+                    .HasForeignKey(d => d.IdProyecto)
+                    .HasConstraintName("fk_proyecto_ganador");
             });
 
             modelBuilder.Entity<Proyecto>(entity =>

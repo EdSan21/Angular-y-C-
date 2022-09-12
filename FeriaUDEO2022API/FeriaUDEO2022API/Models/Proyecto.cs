@@ -8,6 +8,7 @@ namespace FeriaUDEO2022API.Models
         public Proyecto()
         {
             EstudianteProyectos = new HashSet<EstudianteProyecto>();
+            Ganadors = new HashSet<Ganador>();
             ReconocimientoProyectos = new HashSet<ReconocimientoProyecto>();
             SupervisorProyectos = new HashSet<SupervisorProyecto>();
             VotoUsuarios = new HashSet<VotoUsuario>();
@@ -27,6 +28,7 @@ namespace FeriaUDEO2022API.Models
 
         public virtual CategoriaProyecto IdCategoriaNavigation { get; set; } = null!;
         public virtual ICollection<EstudianteProyecto> EstudianteProyectos { get; set; }
+        public virtual ICollection<Ganador> Ganadors { get; set; }
         public virtual ICollection<ReconocimientoProyecto> ReconocimientoProyectos { get; set; }
         public virtual ICollection<SupervisorProyecto> SupervisorProyectos { get; set; }
         public virtual ICollection<VotoUsuario> VotoUsuarios { get; set; }
