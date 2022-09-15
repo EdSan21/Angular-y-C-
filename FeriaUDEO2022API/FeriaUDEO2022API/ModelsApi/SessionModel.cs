@@ -8,6 +8,13 @@
         public string SessionImg { get; set; }
 
     }
+
+    public class SessionReqModel
+    {
+        public int SessionId { get; set; }
+        public string SessionUser { get; set; }
+    }
+
     public class LoginModel
     {
         public string User { get; set; }

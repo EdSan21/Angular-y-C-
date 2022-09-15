@@ -47,5 +47,28 @@ namespace FeriaUDEO2022API.Controllers
             }
             return Ok(respuesta);
         }
+
+        [Route("lg/{id}")]
+        [HttpPost]
+        public async Task<IActionResult> GetProyectsLoggedPageAsync([FromRoute] int id, [FromBody] SessionReqModel User)
+        {
+            var verificador = await _dataRepository.VerificarVoto(id, User.SessionId, User.SessionUser);
+            
+            if (verificador==404)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                var respuesta = await _dataRepository.GetDetailsLoggedAsync(id, User.SessionId);
+                if (respuesta == null)
+                {
+                    return NotFound();
+                }
+                respuesta.voto = verificador;
+                respuesta.votacion = await _dataRepository.GetEventoVotoAsync();
+                return Ok(respuesta);
+            }
+        }
     }
 }

@@ -225,6 +225,11 @@ namespace FeriaUDEO2022API.Models
                     .IsUnicode(false)
                     .HasColumnName("img_standar");
 
+                entity.Property(e => e.LinkDirecto)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("link_directo");
+
                 entity.Property(e => e.Titulo)
                     .HasMaxLength(100)
                     .IsUnicode(false)

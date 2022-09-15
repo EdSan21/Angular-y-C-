@@ -3,6 +3,8 @@
     public class DetailProyectModel
     {
         public string titulo { get; set; }
+        public string categoria { get; set; }
+        public string directo { get; set; }
         public string descripcion { get; set; }
         public string video { get; set; }
         public string imgStandar { get; set; }
@@ -10,8 +12,14 @@
         public string imgBanner { get; set; }
         public string horaInicio { get; set; }
         public string horaFin { get; set; }
+        public bool votacion { get; set; }
         public ICollection<DetailEstudiantesModel> estudiantes { get; set; }
         public ICollection<DetailSupervisorModel> supervisores { get; set; }
+    }
+
+    public class DetailProyectLoggedModel : DetailProyectModel 
+    {
+        public int voto { get; set; }
     }
 
     public class DetailEstudiantesModel { 

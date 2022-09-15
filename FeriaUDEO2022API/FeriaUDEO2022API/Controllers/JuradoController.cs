@@ -26,7 +26,7 @@ namespace FeriaUDEO2022API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetjuradoPageAsync()
         {
-            if (_context.TipoUsuarios == null)
+            if (_context.Usuarios == null)
             {
                 return NotFound();
             }

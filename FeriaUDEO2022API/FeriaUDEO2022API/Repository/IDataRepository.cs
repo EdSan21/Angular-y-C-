@@ -7,5 +7,10 @@ namespace FeriaUDEO2022API.Repository
         Task<ProyectosPageModel> GetProyectsAsync();
 
         Task<DetailProyectModel> GetDetailsAsync(int id);
+        Task<PremiacionPageModel> GetPremiacionAsync();
+        Task<bool> GetEventoVotoAsync();
+        Task<int> VerificarVoto(int idProyecto, int idUsuario, string Usuario);
+        Task<DetailProyectLoggedModel> GetDetailsLoggedAsync(int id, int idUsuario);
+
     }
 }
