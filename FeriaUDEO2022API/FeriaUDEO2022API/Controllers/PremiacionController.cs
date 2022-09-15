@@ -21,7 +21,7 @@ namespace FeriaUDEO2022API.Controllers
         {
             var evento = await _dataRepository.GetEventoVotoAsync();
 
-            if (evento == false)
+            if (evento == true)
             {
                 return Unauthorized();
             }
