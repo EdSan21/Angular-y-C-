@@ -14,7 +14,7 @@ namespace FeriaUDEO2022API.Models
         public string Nombre { get; set; } = null!;
         public string? Nombre2 { get; set; }
         public string Apellido { get; set; } = null!;
-        public string Apellido2 { get; set; } = null!;
+        public string? Apellido2 { get; set; }
         public string Rol { get; set; } = null!;
         public int IdCarrera { get; set; }
         public string Imagen { get; set; } = null!;

@@ -18,7 +18,7 @@ namespace FeriaUDEO2022API.Repository
         public async Task<List<JuradoPageModel>> GetjuradoAsync()
         {
 
-            List<JuradoPageModel> respuesta = await _context.TipoUsuarios.Select(t =>
+            List<JuradoPageModel> respuesta = await _context.TipoUsuarios.Where(x=>x.IdTipoUsuario!=2).Select(t =>
                 new JuradoPageModel { 
                     Tipo=t.Nombre,
                     lista= _context.Usuarios.Where(x=>x.IdTipoUsuario==t.IdTipoUsuario).Select(x=>
@@ -58,7 +58,7 @@ namespace FeriaUDEO2022API.Repository
                             idProyecto = x.IdProyecto,
                             categoria = x.IdCategoriaNavigation.Nombre,
                             titulo = x.Titulo,
-                            descripcion = x.Descripcion,
+                            descripcion = x.Descripcion.Substring(0, 100) + "...",
                             imgCarta = x.ImgCarta,
                             idcategoria=x.IdCategoria
                         }
@@ -70,7 +70,7 @@ namespace FeriaUDEO2022API.Repository
                             idProyecto = x.IdProyecto,
                             categoria = x.IdCategoriaNavigation.Nombre,
                             titulo = x.Titulo,
-                            descripcion = x.Descripcion,
+                            descripcion = x.Descripcion.Substring(0,100)+"...",
                             imgCarta = x.ImgCarta,
                             idcategoria = x.IdCategoria
                         }

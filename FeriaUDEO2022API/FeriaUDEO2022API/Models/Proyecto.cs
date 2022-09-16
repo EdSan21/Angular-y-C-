@@ -25,7 +25,7 @@ namespace FeriaUDEO2022API.Models
         public DateTime HoraInicio { get; set; }
         public DateTime HoraFin { get; set; }
         public int Votos { get; set; }
-        public string? LinkDirecto { get; set; }
+        public string LinkDirecto { get; set; } = null!;
 
         public virtual CategoriaProyecto IdCategoriaNavigation { get; set; } = null!;
         public virtual ICollection<EstudianteProyecto> EstudianteProyectos { get; set; }

@@ -35,7 +35,7 @@ namespace FeriaUDEO2022API.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=FeriaUdeo2022;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source=N1NWPLSK12SQL-v01.shr.prod.ams1.secureserver.net;Initial Catalog=FeriaUdeo2022;Integrated Security=False;User ID=FeriaUdeoDEV;Password=X93Uwm68UBSLJTs;");
             }
         }
 
@@ -74,7 +74,7 @@ namespace FeriaUDEO2022API.Models
             modelBuilder.Entity<Estudiante>(entity =>
             {
                 entity.HasKey(e => e.Carnet)
-                    .HasName("PK__ESTUDIAN__4CDEAA6F6B36A263");
+                    .HasName("PK__ESTUDIAN__4CDEAA6FCDC20164");
 
                 entity.ToTable("ESTUDIANTE");
 
@@ -124,7 +124,7 @@ namespace FeriaUDEO2022API.Models
             modelBuilder.Entity<EstudianteProyecto>(entity =>
             {
                 entity.HasKey(e => e.IdEstudianteProyecto)
-                    .HasName("PK__ESTUDIAN__F3D63E4EF86B1803");
+                    .HasName("PK__ESTUDIAN__F3D63E4E5B64FA55");
 
                 entity.ToTable("ESTUDIANTE_PROYECTO");
 
@@ -170,7 +170,7 @@ namespace FeriaUDEO2022API.Models
             modelBuilder.Entity<Ganador>(entity =>
             {
                 entity.HasKey(e => e.IdPodio)
-                    .HasName("PK__GANADOR__02CACAE3046741EA");
+                    .HasName("PK__GANADOR__02CACAE36C0AC701");
 
                 entity.ToTable("GANADOR");
 
@@ -189,15 +189,14 @@ namespace FeriaUDEO2022API.Models
             modelBuilder.Entity<Proyecto>(entity =>
             {
                 entity.HasKey(e => e.IdProyecto)
-                    .HasName("PK__PROYECTO__F38AD81D74A5384A");
+                    .HasName("PK__PROYECTO__F38AD81D18EA7644");
 
                 entity.ToTable("PROYECTO");
 
                 entity.Property(e => e.IdProyecto).HasColumnName("id_proyecto");
 
                 entity.Property(e => e.Descripcion)
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
+                    .HasColumnType("text")
                     .HasColumnName("descripcion");
 
                 entity.Property(e => e.HoraFin)
@@ -272,7 +271,7 @@ namespace FeriaUDEO2022API.Models
             modelBuilder.Entity<ReconocimientoProyecto>(entity =>
             {
                 entity.HasKey(e => e.IdReconocimientoProyecto)
-                    .HasName("PK__RECONOCI__04188E27A0B1BC48");
+                    .HasName("PK__RECONOCI__04188E279A60C2B5");
 
                 entity.ToTable("RECONOCIMIENTO_PROYECTO");
 
@@ -299,7 +298,7 @@ namespace FeriaUDEO2022API.Models
             modelBuilder.Entity<SupervisorProyecto>(entity =>
             {
                 entity.HasKey(e => e.IdSupervisorProyecto)
-                    .HasName("PK__SUPERVIS__6FEDE2C3E8429422");
+                    .HasName("PK__SUPERVIS__6FEDE2C3AB02DBD2");
 
                 entity.ToTable("SUPERVISOR_PROYECTO");
 
@@ -406,7 +405,7 @@ namespace FeriaUDEO2022API.Models
             modelBuilder.Entity<VotoUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdVotoUsuario)
-                    .HasName("PK__VOTO_USU__9BC1F27B51A38E4B");
+                    .HasName("PK__VOTO_USU__9BC1F27B22934B13");
 
                 entity.ToTable("VOTO_USUARIO");
 
